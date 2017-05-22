@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
+import { RouterModule } from '@angular/router';
+import { Routes } from './config/routes';
 import { AppComponent } from './app.component';
 import { AngularFireModule } from 'angularfire2';
 import { DatabaseConfig } from './config/database.config';
@@ -17,6 +19,7 @@ import { NavbarComponent } from './navbar/navbar.component';
     BrowserModule,
     FormsModule,
     HttpModule,
+    RouterModule.forRoot(Routes),
 
     AngularFireModule.initializeApp(DatabaseConfig, 'chatty'),
   ],
