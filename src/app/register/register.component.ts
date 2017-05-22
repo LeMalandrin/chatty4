@@ -161,6 +161,17 @@ export class RegisterComponent implements OnInit {
 		this.controls['passwordConfirmGroup'] = "form-group";
 		this.controls['passwordConfirmInput'] = "form-control";    		
   	}
+  	/* Mettre à jour tous les contrôles */
+  	udpateAllControls() {
+  		this.validateEmail();
+  		this.validateUsername();
+  		this.validatePassword();
+  		this.validatePasswordConfirm();
+  	}
 
-
+  	/* Effacer le contenu du formulaire */
+  	resetForm() {
+  		this.initUser();
+  		this.udpateAllControls();
+  	}
 }
