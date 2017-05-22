@@ -10,9 +10,29 @@ export class UserService {
   		database.list('/users').subscribe(users=> {	this.users = users }); 
   	}
 
+  	/* Méthode de création d'un utilisateur */
+  	create(user) {
+  		let userToCreate = {
+  			email: user.email,
+  			username: user.username,
+  			password: user.password,
+  			role: "basic",
+  			isActivated: false,
+  			isConnected: false
+  		}
 
+  		this.database.list('/users').push(userToCreate);
+  	}
 
   	/* Méthodes de validation des différents champs tu type utilisateur	*/
+  	isValid(user) {
+  		let isValidEmail = this.isValidEmail(user.email) && !this.isExistingEmail(user.email);
+  		let isValidUsername = this.isValidUsername(user.username) && !this.isExistingUsername(user.username);
+  		let isValidPassword = this.isValidPassword(user.password);
+  		let isValidPasswordConfirm = this.isValidPasswordConfirm(user.password, user.passwordConfirm);
+
+  		return isValidEmail && isValidUsername && isValidPassword && isValidPasswordConfirm;
+  	}
   	isValidEmail(email) {
   		return email.match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
   	}  	
