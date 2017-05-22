@@ -2,7 +2,7 @@
 	<div class="card">
   		<div class="card-block">
     		<h4 class="card-title">Créer un compte</h4>
-				<form>
+				<form autocomplete="off">
 				  	<div [class]="controls['emailGroup']" >
 				    	<label for="email">E-mail</label>
 				    	<input 	type="email" 
@@ -12,7 +12,8 @@
 				    			[(ngModel)]="user.email"
 				    			(keyup)="validateEmail()"
 				    			(change)="validateEmail()"
-				    			(click)="updateAllControls()"> 
+				    			(click)="updateAllControls()"
+				    			autocomplete="off"> 
   						<div class="form-control-feedback" *ngFor="let error of errors['email']">
   							{{ error }}
   						</div>
@@ -28,7 +29,8 @@
 				    			[(ngModel)]="user.username"
 				    			(change)="validateUsername()"
 				    			(keyup)="validateUsername()"
-				    			(click)="updateAllControls()">
+				    			(click)="updateAllControls()"
+				    			autocomplete="off">
   						<div class="form-control-feedback" *ngFor="let error of errors['username']">
   							{{ error }}
   						</div>
@@ -43,7 +45,8 @@
 				    			[(ngModel)]="user.password"
 				    			(keyup)="validatePassword()"
 				    			(change)="validatePassword()"
-				    			(click)="updateAllControls()">
+				    			(click)="updateAllControls()"
+				    			autocomplete="off">
   						<div class="form-control-feedback" *ngFor="let error of errors['password']">
   							{{ error }}
   						</div>
@@ -58,7 +61,8 @@
 				    			[(ngModel)]="user.passwordConfirm"
 				    			(change)="validatePasswordConfirm()"
 				    			(keyup)="validatePasswordConfirm()"
-				    			(click)="updateAllControls()">
+				    			(click)="updateAllControls()"
+				    			autocomplete="off">
   						<div class="form-control-feedback" *ngFor="let error of errors['passwordConfirm']">
   							{{ error }}
   						</div>
