@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -12,7 +13,7 @@ export class RegisterComponent implements OnInit {
 	errors:any[] = [];
 	user:any;
 
-  	constructor(private userService:UserService) { 
+  	constructor(private userService:UserService, private router:Router) { 
   		this.initUser(); //Initialisation de la variable user
   		this.initControls(); //Initialisation des contrôles du formulaire
   		this.initErrors(); //Initialisation des erreurs
@@ -51,9 +52,9 @@ export class RegisterComponent implements OnInit {
 
   	/* Méthode de traitement du formulaire */
   	register() {
-  		console.log(this.userService.isValid(this.user));
   		if(this.userService.isValid(this.user)) {
   			this.userService.create(this.user);
+  			this.router.navigate(['/login']);
   		}
   	}
 
