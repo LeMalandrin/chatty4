@@ -8,6 +8,7 @@ import { RouterModule } from '@angular/router';
 import { Routes } from './config/routes';
 import { AppComponent } from './app.component';
 import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { DatabaseConfig } from './config/database.config';
 import { NavbarComponent } from './navbar/navbar.component';
 import { RegisterComponent } from './register/register.component';
@@ -26,6 +27,7 @@ import { RegisterComponent } from './register/register.component';
     RouterModule.forRoot(Routes),
 
     AngularFireModule.initializeApp(DatabaseConfig, 'chatty'),
+    AngularFireDatabaseModule
   ],
   providers: [],
   bootstrap: [AppComponent]
