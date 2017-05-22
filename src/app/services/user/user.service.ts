@@ -10,6 +10,38 @@ export class UserService {
   		database.list('/users').subscribe(users=> {	this.users = users }); 
   	}
 
+
+  	login() {
+
+  	}
+
+
+  	checkPasswordByEmail(email, password) {  		
+		for(var user of this.users) {
+			if(email.toLowerCase()===user.email.toLowerCase()) {
+				console.log(password, user.password);
+				if(user.password===password) {
+					return true;
+				} else {
+					return false;
+				}
+			}
+		}
+		return false;
+  	}
+  	checkPasswordByUsername(username, password) {  		
+		for(var user of this.users) {
+			if(username.toLowerCase()===user.username.toLowerCase()) {
+				if(user.password===password) {
+					return true;
+				} else {
+					return false;
+				}
+			}
+		}
+		return false;
+  	}
+
   	/* Méthode de création d'un utilisateur */
   	create(user) {
   		let userToCreate = {
