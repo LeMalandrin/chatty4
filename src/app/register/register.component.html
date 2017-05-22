@@ -3,29 +3,60 @@
   		<div class="card-block">
     		<h4 class="card-title">Créer un compte</h4>
 				<form>
-				  	<div class="form-group">
+				  	<div [class]="controls['emailGroup']" >
 				    	<label for="email">E-mail</label>
-				    	<input type="email" class="form-control" id="email" (keyup)="validateEmail()">
-  						<div class="form-control-feedback">Sorry, that username's taken. Try another?</div>
+				    	<input 	type="email" 
+				    			name="email"
+				    			[class]="controls['emailInput']" 
+				    			id="email" 
+				    			[(ngModel)]="user.email"
+				    			(keyup)="validateEmail()"> 
+  						<div class="form-control-feedback" *ngFor="let error of errors['email']">
+  							{{ error }}
+  						</div>
 				  	</div>
 
 
-				  	<div class="form-group">
+				  	<div [class]="controls['usernameGroup']">
 				    	<label for="username">Nom d'utilisateur</label>
-				    	<input type="text" class="form-control" id="username">
+				    	<input 	type="text" 
+				    			name="username"
+				    			[class]="controls['usernameInput']"
+				    			id="username"
+				    			[(ngModel)]="user.username"
+				    			(keyup)="validateUsername()">
+  						<div class="form-control-feedback" *ngFor="let error of errors['username']">
+  							{{ error }}
+  						</div>
 				  	</div>
 
-
-				  	<div class="form-group">
+				  	<div [class]="controls['passwordGroup']">
 				    	<label for="password">Mot de passe</label>
-				    	<input type="password" class="form-control" id="password">
+				    	<input 	type="password" 
+				    			name="password"
+				    			[class]="controls['passwordInput']"
+				    			id="password"
+				    			[(ngModel)]="user.password"
+				    			(keyup)="validatePassword()">
+  						<div class="form-control-feedback" *ngFor="let error of errors['password']">
+  							{{ error }}
+  						</div>
+				  	</div>
+
+				  	<div [class]="controls['passwordConfirmGroup']">
+				    	<label for="passwordConfirm">Mot de passe</label>
+				    	<input 	type="password" 
+				    			name="passwordConfirm"
+				    			[class]="controls['passwordConfirmInput']"
+				    			id="passwordConfirm"
+				    			[(ngModel)]="user.passwordConfirm"
+				    			(keyup)="validatePasswordConfirm()">
+  						<div class="form-control-feedback" *ngFor="let error of errors['passwordConfirm']">
+  							{{ error }}
+  						</div>
 				  	</div>
 
 
-				  	<div class="form-group">
-				    	<label for="passwordConfirm">Confirmer le mot de passe</label>
-				    	<input type="password" class="form-control" id="passwordConfirm">
-				  	</div>
 
 				  	<button type="button" class="btn btn-default">Effacer tout</button>
 				  	<button type="button" class="btn btn-primary">Créer le compte</button>
