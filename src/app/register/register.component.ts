@@ -49,8 +49,13 @@ export class RegisterComponent implements OnInit {
   		this.errors['passwordConfirm'] = [];
   	}
 
-
-
+  	/* Méthode de traitement du formulaire */
+  	register() {
+  		console.log(this.userService.isValid(this.user));
+  		if(this.userService.isValid(this.user)) {
+  			this.userService.create(this.user);
+  		}
+  	}
 
 
 
@@ -162,7 +167,7 @@ export class RegisterComponent implements OnInit {
 		this.controls['passwordConfirmInput'] = "form-control";    		
   	}
   	/* Mettre à jour tous les contrôles */
-  	udpateAllControls() {
+  	updateAllControls() {
   		this.validateEmail();
   		this.validateUsername();
   		this.validatePassword();
@@ -172,6 +177,6 @@ export class RegisterComponent implements OnInit {
   	/* Effacer le contenu du formulaire */
   	resetForm() {
   		this.initUser();
-  		this.udpateAllControls();
+  		this.updateAllControls();
   	}
 }

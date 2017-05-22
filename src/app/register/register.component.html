@@ -10,7 +10,9 @@
 				    			[class]="controls['emailInput']" 
 				    			id="email" 
 				    			[(ngModel)]="user.email"
-				    			(keyup)="validateEmail()"> 
+				    			(keyup)="validateEmail()"
+				    			(change)="validateEmail()"
+				    			(click)="updateAllControls()"> 
   						<div class="form-control-feedback" *ngFor="let error of errors['email']">
   							{{ error }}
   						</div>
@@ -24,7 +26,9 @@
 				    			[class]="controls['usernameInput']"
 				    			id="username"
 				    			[(ngModel)]="user.username"
-				    			(keyup)="validateUsername()">
+				    			(change)="validateUsername()"
+				    			(keyup)="validateUsername()"
+				    			(click)="updateAllControls()">
   						<div class="form-control-feedback" *ngFor="let error of errors['username']">
   							{{ error }}
   						</div>
@@ -37,7 +41,9 @@
 				    			[class]="controls['passwordInput']"
 				    			id="password"
 				    			[(ngModel)]="user.password"
-				    			(keyup)="validatePassword()">
+				    			(keyup)="validatePassword()"
+				    			(change)="validatePassword()"
+				    			(click)="updateAllControls()">
   						<div class="form-control-feedback" *ngFor="let error of errors['password']">
   							{{ error }}
   						</div>
@@ -50,7 +56,9 @@
 				    			[class]="controls['passwordConfirmInput']"
 				    			id="passwordConfirm"
 				    			[(ngModel)]="user.passwordConfirm"
-				    			(keyup)="validatePasswordConfirm()">
+				    			(change)="validatePasswordConfirm()"
+				    			(keyup)="validatePasswordConfirm()"
+				    			(click)="updateAllControls()">
   						<div class="form-control-feedback" *ngFor="let error of errors['passwordConfirm']">
   							{{ error }}
   						</div>
@@ -61,7 +69,9 @@
 				  	<button type="button" 
 				  			class="btn btn-default" 
 				  			(click)="resetForm()">Effacer tout</button>
-				  	<button type="button" class="btn btn-primary">Créer le compte</button>
+				  	<button type="button" 
+				  			class="btn btn-primary"
+				  			(click)="register()">Créer le compte</button>
 				</form>
 		</div>
 	</div>
