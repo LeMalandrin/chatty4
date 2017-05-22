@@ -5,7 +5,7 @@
 				<form>
 				  	<div class="form-group">
 				    	<label for="email">E-mail</label>
-				    	<input type="email" class="form-control" id="email">
+				    	<input type="email" class="form-control" id="email" (keyup)="validateEmail()">
   						<div class="form-control-feedback">Sorry, that username's taken. Try another?</div>
 				  	</div>
 
