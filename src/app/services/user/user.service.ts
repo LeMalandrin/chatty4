@@ -6,9 +6,8 @@ import { AngularFireDatabase } from 'angularfire2/database';
 export class UserService {
 	users:any[];
 
-    encryptionService: EncryptionService;
 
-  	constructor(encryptionService: EncryptionService, private database:AngularFireDatabase) { 
+  	constructor(private encryptionService: EncryptionService, private database:AngularFireDatabase) { 
   		/* Alimentation de la variable users */
   		database.list('/users').subscribe(users=> {	this.users = users; }); 
   	}
@@ -19,10 +18,10 @@ export class UserService {
   	}
 
 
-  	checkPasswordByEmail(email, password) {  		
+  	checkPasswordByEmail(email, password) {  	
+  		password = this.encryptionService.encode(password);	
 		for(var user of this.users) {
 			if(email.toLowerCase()===user.email.toLowerCase()) {
-				console.log(password, user.password);
 				if(user.password===password) {
 					return true;
 				} else {
@@ -32,7 +31,8 @@ export class UserService {
 		}
 		return false;
   	}
-  	checkPasswordByUsername(username, password) {  		
+  	checkPasswordByUsername(username, password) { 
+  		password = this.encryptionService.encode(password); 		
 		for(var user of this.users) {
 			if(username.toLowerCase()===user.username.toLowerCase()) {
 				if(user.password===password) {
@@ -84,7 +84,6 @@ export class UserService {
 		return username.match(/^[A-Za-z0-9\_\-]{5,15}$/);
 	}
 	isExistingUsername(username) {
-  		console.log(this.users);	
 		let existing = false;
 		for(var user of this.users) {
 			if(username.toLowerCase()===user.username.toLowerCase()) {
@@ -94,7 +93,6 @@ export class UserService {
 		return existing;
 	}
 	isValidPassword(password) {
-		password = this.encryptionService.encode(password);
 		return password.match(/^[A-Za-z0-9]{6,20}$/);
 	}	
 	isValidPasswordConfirm(password, passwordConfirm) {
