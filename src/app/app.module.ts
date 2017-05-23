@@ -13,6 +13,7 @@ import { DatabaseConfig } from './config/database.config';
 import { NavbarComponent } from './navbar/navbar.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
+import { EncryptionService } from './services/encryption/encryption.service';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,7 @@ import { LoginComponent } from './login/login.component';
     AngularFireModule.initializeApp(DatabaseConfig, 'chatty'),
     AngularFireDatabaseModule
   ],
-  providers: [],
+  providers: [EncryptionService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,13 +1,16 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
+import { EncryptionService } from '../encryption/encryption.service';
 import { AngularFireDatabase } from 'angularfire2/database';
 
 @Injectable()
 export class UserService {
 	users:any[];
 
-  	constructor(private database:AngularFireDatabase) { 
+    encryptionService: EncryptionService;
+
+  	constructor(encryptionService: EncryptionService, private database:AngularFireDatabase) { 
   		/* Alimentation de la variable users */
-  		database.list('/users').subscribe(users=> {	this.users = users }); 
+  		database.list('/users').subscribe(users=> {	this.users = users; }); 
   	}
 
 
@@ -47,7 +50,7 @@ export class UserService {
   		let userToCreate = {
   			email: user.email,
   			username: user.username,
-  			password: user.password,
+  			password: this.encryptionService.encode(user.password),
   			role: "basic",
   			isActivated: false,
   			isConnected: false
@@ -81,6 +84,7 @@ export class UserService {
 		return username.match(/^[A-Za-z0-9\_\-]{5,15}$/);
 	}
 	isExistingUsername(username) {
+  		console.log(this.users);	
 		let existing = false;
 		for(var user of this.users) {
 			if(username.toLowerCase()===user.username.toLowerCase()) {
@@ -90,6 +94,7 @@ export class UserService {
 		return existing;
 	}
 	isValidPassword(password) {
+		password = this.encryptionService.encode(password);
 		return password.match(/^[A-Za-z0-9]{6,20}$/);
 	}	
 	isValidPasswordConfirm(password, passwordConfirm) {
