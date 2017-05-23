@@ -1,19 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user/user.service';
+import { EncryptionService } from '../services/encryption/encryption.service';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
-  providers: [UserService]
+  providers: [UserService, EncryptionService]
 })
 export class RegisterComponent implements OnInit {
 	controls:any[] = [];
 	errors:any[] = [];
 	user:any;
 
-  	constructor(private userService:UserService, private router:Router) { 
+  	constructor(private userService:UserService, private router:Router, private encryptionService:EncryptionService) { 
   		this.initUser(); //Initialisation de la variable user
   		this.initControls(); //Initialisation des contrôles du formulaire
   		this.initErrors(); //Initialisation des erreurs
@@ -52,7 +53,7 @@ export class RegisterComponent implements OnInit {
 
   	/* Méthode de traitement du formulaire */
   	register() {
-  		if(this.userService.isValid(this.user)) {
+  		if(this.userService.isValid(this.user)) {  		
   			this.userService.create(this.user);
   			this.router.navigate(['/login']);
   		}
