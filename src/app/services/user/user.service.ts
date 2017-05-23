@@ -13,10 +13,56 @@ export class UserService {
   	}
 
 
-  	login() {
+  	loginByEmail(email, password) {
+  		password = this.encryptionService.encode(password);
+  		let auth = false;
 
+  		for(var user of this.users) {
+  			if(user.email.toLowerCase() === email.toLowerCase()) {
+  				if(user.isConnected) {
+  					auth = false;
+  				} else if(user.isBlocked) {
+  					auth = false;
+  				} else {
+  					if( this.encryptionService.compare(user.password, password) ) {		
+  						auth = true;
+  						localStorage.setItem('auth', user.$key);
+  						this.database.object('users/' + user.$key).update({
+  							isConnected: true
+  						});
+  					} else {  	
+  						auth = false;
+  					}
+  				}
+  			}
+  		}
+  		return auth;
   	}
+  	loginByUsername(username, password) {
+  		password = this.encryptionService.encode(password);
+  		let auth = false;
 
+  		for(var user of this.users) {
+  			if(user.username.toLowerCase() === username.toLowerCase()) {
+  				if(user.isConnected) {
+  					auth = false;
+  				} else if(user.isBlocked) {
+  					auth = false;
+  				} else {
+  					if( this.encryptionService.compare(user.password, password) ) {		
+  						auth = true;
+  						localStorage.setItem('auth', user.$key);
+  						this.database.object('users/' + user.$key).update({
+  							isConnected: true
+  						});
+  					} else {  	
+  						auth = false;
+  					}
+  				}
+  			}
+  		}
+  		return auth;
+  	}
 
   	checkPasswordByEmail(email, password) {  	
   		password = this.encryptionService.encode(password);	
@@ -52,7 +98,7 @@ export class UserService {
   			username: user.username,
   			password: this.encryptionService.encode(user.password),
   			role: "basic",
-  			isActivated: false,
+  			isBlocked: false,
   			isConnected: false
   		}
 
