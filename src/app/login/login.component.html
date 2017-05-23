@@ -3,6 +3,7 @@
   		<div class="card-block">
     		<h4 class="card-title">Se connecter</h4>
 				<form autocomplete="off">
+
 				  	<div [class]="controls['loginGroup']" >
 				    	<label for="login">E-mail ou nom d'utilisateur</label>
 				    	<input 	type="text" 
@@ -10,8 +11,7 @@
 				    			[class]="controls['loginInput']" 
 				    			[(ngModel)]="user.login" 
 				    			(keyup)="validateLogin()"
-				    			(change)="validateLogin()"
-				    			autocomplete="off"> 
+				    			autocomplete="false"> 
   						<div class="form-control-feedback" *ngFor="let error of errors['login']">
   							{{ error }}
   						</div>
@@ -25,7 +25,6 @@
 				    			[class]="controls['passwordInput']"
 				    			[(ngModel)]="user.password" 
 				    			(keyup)="validatePassword()"
-				    			(change)="validatePassword()"
 				    			id="password"
 				    			autocomplete="off">
   						<div class="form-control-feedback" *ngFor="let error of errors['password']">

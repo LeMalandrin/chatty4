@@ -19,8 +19,7 @@ export class LoginComponent implements OnInit {
   		this.initErrors(); //Initialisation des erreurs
 	}
 
-	ngOnInit() {
-	}
+	ngOnInit() {}
 
 	validateLogin() {
 		this.errors['login'] = [];

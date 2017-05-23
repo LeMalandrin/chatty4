@@ -11,7 +11,6 @@
 				    			id="email" 
 				    			[(ngModel)]="user.email"
 				    			(keyup)="validateEmail()"
-				    			(change)="validateEmail()"
 				    			(click)="updateAllControls()"
 				    			autocomplete="off"> 
   						<div class="form-control-feedback" *ngFor="let error of errors['email']">
@@ -27,7 +26,6 @@
 				    			[class]="controls['usernameInput']"
 				    			id="username"
 				    			[(ngModel)]="user.username"
-				    			(change)="validateUsername()"
 				    			(keyup)="validateUsername()"
 				    			(click)="updateAllControls()"
 				    			autocomplete="off">
@@ -44,7 +42,6 @@
 				    			id="password"
 				    			[(ngModel)]="user.password"
 				    			(keyup)="validatePassword()"
-				    			(change)="validatePassword()"
 				    			(click)="updateAllControls()"
 				    			autocomplete="off">
   						<div class="form-control-feedback" *ngFor="let error of errors['password']">
@@ -59,7 +56,6 @@
 				    			[class]="controls['passwordConfirmInput']"
 				    			id="passwordConfirm"
 				    			[(ngModel)]="user.passwordConfirm"
-				    			(change)="validatePasswordConfirm()"
 				    			(keyup)="validatePasswordConfirm()"
 				    			(click)="updateAllControls()"
 				    			autocomplete="off">
