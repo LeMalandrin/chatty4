@@ -6,7 +6,9 @@ export class EncryptionService {
 	private suffix:string = "Hypocrites !"; 
   	constructor() {}
 
-
+  	compare(password1, password2) {
+  		return this.encode(password1) === this.encode(password2);
+  	}
   	encode(password) {
   		return btoa(this.getPrefix() + password + this.getSuffix());
   	}
