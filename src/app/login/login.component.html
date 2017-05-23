@@ -10,7 +10,6 @@
 				    			name="login"
 				    			[class]="controls['loginInput']" 
 				    			[(ngModel)]="user.login" 
-				    			(keyup)="validateLogin()"
 				    			autocomplete="false"> 
   						<div class="form-control-feedback" *ngFor="let error of errors['login']">
   							{{ error }}
@@ -24,7 +23,6 @@
 				    			name="password"
 				    			[class]="controls['passwordInput']"
 				    			[(ngModel)]="user.password" 
-				    			(keyup)="validatePassword()"
 				    			id="password"
 				    			autocomplete="off">
   						<div class="form-control-feedback" *ngFor="let error of errors['password']">

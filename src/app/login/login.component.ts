@@ -21,6 +21,42 @@ export class LoginComponent implements OnInit {
 
 	ngOnInit() {}
 
+  login() {
+    this.updateAllControls();
+    let logged = false;
+    if(this.user.login.length>0) {
+      if(this.user.login.indexOf('@')>0) {
+        logged = this.userService.loginByEmail(this.user.login, this.user.password) ;
+      } else {
+        logged = this.userService.loginByUsername(this.user.login, this.user.password) ;
+      }
+    }
+    
+  }
+
+
+  /* Méthode d'initialisation de la variable user */
+  initUser() {
+    this.user = {
+      login: "",
+      password: ""
+    };
+  }
+  /* Méthode d'initialisation des contrôles du formulaire */
+  initControls() {
+    this.controls['loginGroup'] = "form-group";
+    this.controls['loginInput'] = "form-control";
+    this.controls['passwordGroup'] = "form-group";
+    this.controls['passwordInput'] = "form-control";
+  }
+  /* Méthode d'initialisation des erreurs */
+  initErrors() {
+    this.errors['login'] = [];
+    this.errors['password'] = [];
+  }
+
+
+  /* Méthode de validation du login */
 	validateLogin() {
 		this.errors['login'] = [];
 		if(this.user.login.length>0) {
@@ -44,13 +80,12 @@ export class LoginComponent implements OnInit {
   			this.controls['loginGroup'] = "form-group has-success";
   			this.controls['loginInput'] = "form-control form-control-success";  			
   		}
-  	}
-  	resetLoginControl() {
+  }
+  resetLoginControl() {
 		this.controls['loginGroup'] = "form-group";
 		this.controls['loginInput'] = "form-control";    		
-  	}
-
-
+  }
+  /* Méthode de validation du mot de passe */
 	validatePassword() {
 		this.errors['password'] = [];
 		if(this.user.password.length>0) {
@@ -74,33 +109,21 @@ export class LoginComponent implements OnInit {
   			this.controls['passwordGroup'] = "form-group has-success";
   			this.controls['passwordInput'] = "form-control form-control-success";  			
   		}
-  	}
-  	resetPasswordControl() {
+  }
+  resetPasswordControl() {
 		this.controls['passwordGroup'] = "form-group";
 		this.controls['passwordInput'] = "form-control";    		
-  	}
+  }
+  /* Mettre à jour tous les contrôles */
+  updateAllControls() {
+    this.validateLogin();
+    this.validatePassword();
+  }
 
-
-
-
-	/* Méthode d'initialisation de la variable user */
-  	initUser() {
-  		this.user = {
-  			login: "",
-  			password: ""
-  		};
-  	}
-  	/* Méthode d'initialisation des contrôles du formulaire */
-  	initControls() {
-  		this.controls['loginGroup'] = "form-group";
-  		this.controls['loginInput'] = "form-control";
-  		this.controls['passwordGroup'] = "form-group";
-  		this.controls['passwordInput'] = "form-control";
-  	}
-  	/* Méthode d'initialisation des erreurs */
-  	initErrors() {
-  		this.errors['login'] = [];
-  		this.errors['password'] = [];
-  	}
+  /* Effacer le contenu du formulaire */
+  resetForm() {
+    this.initUser();
+    this.updateAllControls();
+  }
 
 }
